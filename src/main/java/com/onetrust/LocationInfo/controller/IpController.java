@@ -9,7 +9,7 @@ public class IpController{
     @Autowired
     public IpService services;
 
-    public String getIP(){
+    public String getIP() throws Exception {
         return services.getClient();
     }
 
