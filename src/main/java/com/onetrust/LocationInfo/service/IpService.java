@@ -36,7 +36,7 @@ public class IpService {
                 remoteAddr = request.getRemoteAddr();
             }
         }
-        Map<String, String> map = new HashMap<String, String>();
+        /*Map<String, String> map = new HashMap<String, String>();
 
         Enumeration headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
@@ -45,7 +45,7 @@ public class IpService {
             map.put(key, value);
         }
         System.out.println(map);
-
+        */
         return remoteAddr;
         // return tellCountry(remoteAddr);
     }
