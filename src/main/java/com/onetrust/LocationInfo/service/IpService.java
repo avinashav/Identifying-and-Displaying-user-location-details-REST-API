@@ -21,9 +21,12 @@ public class IpService {
         this.request = request;
     }
 
+
     public IpDto getClient() throws Exception {
         String remoteAddr = "";
-        InetAddress address = null;
+//        InetAddress address = null;               //for checking IPv4 or IPv6
+
+
         if (request != null) {
             remoteAddr = request.getHeader("X-FORWARDED-FOR");
 
@@ -41,7 +44,7 @@ public class IpService {
             System.out.println("Its an IPV4 address");
         }
         */
-        //return remoteAddr;                        //return IP address of Client
+
         // return tellCountry(remoteAddr);          //Function-call 3rd Party API to get location details
         return LocationDetails(remoteAddr);         //calls max-mind geoIP package to get client-IP details
     }
@@ -62,20 +65,29 @@ public class IpService {
             Country country = response.getCountry();
             countryCode = country.getIsoCode();            // example: 'US'
             countryName = country.getName();               // example: 'United States'
-            //System.out.println("Country Code: "+ countryCode + "\n Country Name: " + countryName); // '美国'
+
+            //Initializing the DTO object with returned values
             IpDto.setIpAddress(searchIpAddress);
             IpDto.setCountryCode(countryCode);
             IpDto.setCountryName(countryName);
 
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (GeoIp2Exception e) {
-            e.printStackTrace();
+        } /*catch(AddressNotFoundException e){
+            IpDto.setIpAddress(searchIpAddress);
+            IpDto.setCountryCode(e.getMessage());
+            IpDto.setCountryName(e.getMessage());
+        }*/
+        catch (GeoIp2Exception e) {
+            IpDto.setIpAddress(searchIpAddress);
+            IpDto.setCountryCode(e.getMessage());
+            IpDto.setCountryName(e.getMessage());
         }
-//        return "Ip-Address: " +searchMe + "\n country-code: " + countryCode + "\n country-name:" + countryName;
+
         return IpDto;
     }
 /*
+        //Function-call 3rd Party API to get location details
     public String tellCountry(String systemipaddress) throws IOException, JSONException {
         URL url = new URL("http://api.db-ip.com/v2/free/" + systemipaddress + "/countryCode");
         URLConnection urlcon = url.openConnection();
