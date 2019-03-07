@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/ip")
-public class IpController{
+public class GeoLocationController {
     @Autowired
     public IpService ipservices;
 

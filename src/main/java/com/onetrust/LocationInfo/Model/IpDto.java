@@ -1,6 +1,6 @@
 package com.onetrust.LocationInfo.Model;
 
-public class IpDto {
+public class IpIpDto {
     private String ipAddress;
     private String countryCode;
     private String countryName;
