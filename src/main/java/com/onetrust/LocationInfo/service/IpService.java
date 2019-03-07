@@ -24,8 +24,7 @@ public class IpService {
 
     public IpDto getClient() throws Exception {
         String remoteAddr = "";
-//        InetAddress address = null;               //for checking IPv4 or IPv6
-
+        //InetAddress address = null;               //for checking IPv4 or IPv6
 
         if (request != null) {
             remoteAddr = request.getHeader("X-FORWARDED-FOR");
@@ -44,12 +43,10 @@ public class IpService {
             System.out.println("Its an IPV4 address");
         }
         */
-
-        // return tellCountry(remoteAddr);          //Function-call 3rd Party API to get location details
-        return LocationDetails(remoteAddr);         //calls max-mind geoIP package to get client-IP details
+        return locationDetails(remoteAddr);         //calls max-mind geoIP package to get client-IP details
     }
 
-    public IpDto LocationDetails(String searchIpAddress){
+    public IpDto locationDetails(String searchIpAddress){
 
         String countryName = "";
         String countryCode = "";
@@ -73,11 +70,7 @@ public class IpService {
 
         } catch (IOException e) {
             e.printStackTrace();
-        } /*catch(AddressNotFoundException e){
-            IpDto.setIpAddress(searchIpAddress);
-            IpDto.setCountryCode(e.getMessage());
-            IpDto.setCountryName(e.getMessage());
-        }*/
+        }
         catch (GeoIp2Exception e) {
             IpDto.setIpAddress(searchIpAddress);
             IpDto.setCountryCode(e.getMessage());
@@ -86,21 +79,5 @@ public class IpService {
 
         return IpDto;
     }
-/*
-        //Function-call 3rd Party API to get location details
-    public String tellCountry(String systemipaddress) throws IOException, JSONException {
-        URL url = new URL("http://api.db-ip.com/v2/free/" + systemipaddress + "/countryCode");
-        URLConnection urlcon = url.openConnection();
-        StringBuilder sb = new StringBuilder();
-        BufferedReader br = new BufferedReader(new InputStreamReader(urlcon.getInputStream()));
-        String line;
-        while ((line = br.readLine()) != null)
-        {
-            sb.append(line);
-        }
-        //JSONObject json = new JSONObject(sb.toString());
-        //return (json.getString("countryCode"));
-        return sb.toString();
-    }
-*/
+
 }

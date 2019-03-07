@@ -14,16 +14,7 @@
 	<packaging>war</packaging>
 	<name>LocationInfo</name>
 	<description>Demo project for Spring Boot</description>
-
-	<!--	For Docker Deployment	-->
-<!--
-	<properties>
-		<docker.image.prefix>${env.DOCKER_REGISTRY}</docker.image.prefix>
-		<docker.registry>${env.DOCKER_REGISTRY}</docker.registry>
-		<java.version>1.8</java.version>
-	</properties>
--->
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -76,35 +67,6 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-
-<!--	For Docker Deployment	-->
-<!--
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.11</version>
-				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-					<dockerDirectory>src/main/docker</dockerDirectory>
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
-					<serverId>${docker.registry}</serverId>
-					<registryUrl>https://${docker.registry}</registryUrl>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>javax.activation</groupId>
-						<artifactId>activation</artifactId>
-						<version>1.1.1</version>
-					</dependency>
-				</dependencies>
-			</plugin>
--->
 		</plugins>
 	</build>
 
