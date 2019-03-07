@@ -51,6 +51,12 @@ public class IpService {
         String countryName = "";
         String countryCode = "";
 
+        /*Country Service - GeoIP2 Java API
+        This creates a WebServiceClient object that is thread-safe and can be
+        reused across requests. Reusing the object will allow it to keep
+        connections alive for future requests. The object is closeable, but
+        it should not be closed until you are finished making requests with it.
+         */
         try (WebServiceClient client = new WebServiceClient.Builder(139613, "juLizFqIbkkQ")
                 .build()) {
 
