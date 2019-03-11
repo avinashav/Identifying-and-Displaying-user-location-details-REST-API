@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/ip")
 public class GeoLocationController {
     @Autowired
-    public IpService ipservices;
+    public IpService ipservice;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     @ResponseBody
     public IpDto getIP() throws Exception {
-        return ipservices.getClient();
+        return ipservice.getClient();
     }
 }
