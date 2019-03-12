@@ -1,19 +1,31 @@
 package com.onetrust.LocationInfo.controller;
 
-import com.onetrust.LocationInfo.Model.IpDto;
-import com.onetrust.LocationInfo.service.IpService;
+import com.maxmind.geoip2.exception.AddressNotFoundException;
+import org.apache.log4j.Logger;
+import com.onetrust.LocationInfo.model.GeoLocationDto;
+import com.onetrust.LocationInfo.service.GeoLocationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/ip")
 public class GeoLocationController {
+    private static final Logger logger = Logger.getLogger(GeoLocationController.class);
     @Autowired
-    public IpService ipservice;
+    public GeoLocationServiceImpl ipservice;
 
     @GetMapping
-    @ResponseBody
-    public IpDto getIP() throws Exception {
-        return ipservice.getClient();
+    public GeoLocationDto getIP(){
+        GeoLocationDto obj = null;
+        try {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Our application is executed!");
+            }
+            obj = ipservice.getClient();
+        }
+        catch (AddressNotFoundException e) {
+            logger.error(e);
+        }
+        return obj;
     }
 }
