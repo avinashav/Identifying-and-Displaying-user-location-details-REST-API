@@ -1,16 +1,18 @@
 package com.onetrust.LocationInfo.service;
+
 import com.maxmind.geoip2.WebServiceClient;
 import com.maxmind.geoip2.exception.AddressNotFoundException;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CountryResponse;
 import com.maxmind.geoip2.record.Country;
 import com.onetrust.LocationInfo.model.GeoLocationDto;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.InetAddress;
-import org.apache.log4j.Logger;
 
 @Service
 public class GeoLocationServiceImpl implements GeoLocationService{
@@ -52,7 +54,8 @@ public class GeoLocationServiceImpl implements GeoLocationService{
         try (WebServiceClient client = new WebServiceClient.Builder(139613, "juLizFqIbkkQ")
                 .build()) {
 
-            InetAddress ipAddress = InetAddress.getByName(searchIpAddress);
+//            InetAddress ipAddress = InetAddress.getByName(searchIpAddress);
+            InetAddress ipAddress = InetAddress.getByName("182.156.244.34");
             CountryResponse response = client.country(ipAddress);
 
             Country country = response.getCountry();
